@@ -1,7 +1,7 @@
 import folium
 from importlib import import_module
 
-# Importamos el grafo ya procesado del Bloque 2
+
 procesador = import_module("2_procesador_grafo")
 
 def obtener_color_y_grosor(fc):
@@ -17,7 +17,7 @@ def generar_mapa_interactivo():
     print("--- BLOQUE 3: RENDERIZANDO MAPA ESTILO GOOGLE MAPS ---")
     
     centro_la = [34.0488, -118.2518]
-    # Usamos OpenStreetMap como capa base limpia, gratuita y con nombres reales de calles
+   
     mapa = folium.Map(
     location=centro_la,
     zoom_start=15,
@@ -26,7 +26,7 @@ def generar_mapa_interactivo():
 )
 
 
-    # Creamos 3 grupos de capas independientes para alternar horarios en vivo
+   
     capa_14h = folium.FeatureGroup(name="14:00 - Hora Valle (Fluido)", show=False)
     capa_08h = folium.FeatureGroup(name="08:00 - Hora Punta Mañana", show=False)
     capa_18h = folium.FeatureGroup(name="18:00 - Hora Punta Noche (Saturado)", show=True)
@@ -69,7 +69,7 @@ def generar_mapa_interactivo():
                 tooltip=tooltip_html
             ).add_to(grupo_capa)
 
-    # Agregamos las 3 capas al mapa y activamos el control de intercambio en la esquina superior derecha
+    
     capa_14h.add_to(mapa)
     capa_08h.add_to(mapa)
     capa_18h.add_to(mapa)
