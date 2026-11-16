@@ -6,7 +6,7 @@ def construir_grafo_ponderado():
     G = ox.load_graphml("data/red_vial_LA.graphml")
     df = pd.read_csv("data/dataset_trafico_LA.csv")
 
-    # Creamos un diccionario indexado por (u, v, key) para búsqueda ultra rápida O(1)
+    
     metricas_por_arista = {}
     
     for _, row in df.iterrows():
@@ -14,7 +14,7 @@ def construir_grafo_ponderado():
         t_ideal = row['t_ideal_min']
         dist_km = row['longitud_m'] / 1000.0
 
-        # Calculamos T_real (en minutos) y FC para cada franja horaria: T_real = (dist / vel) * 60
+       
         t_14h = (dist_km / row['vel_14h_valle']) * 60.0
         fc_14h = t_14h / t_ideal
 
@@ -32,7 +32,7 @@ def construir_grafo_ponderado():
             '18h': {'peso_min': t_18h, 'fc': fc_18h, 'vel': row['vel_18h_noche']}
         }
 
-    # Inyectamos los atributos dinámicos en las aristas del Grafo NetworkX
+    
     cuellos_18h = 0
     for u, v, k, data in G.edges(keys=True, data=True):
         m = metricas_por_arista.get((u, v, k))
